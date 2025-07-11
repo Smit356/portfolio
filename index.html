@@ -14,7 +14,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/TextPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js"></script> <style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollToPlugin.min.js"></script>
+
+    <style>
         /* --- Global Variables & Resets --- */
         :root {
             /* Color Palette */
@@ -892,7 +894,7 @@
             .contact-form-card { padding: 30px; }
             .contact-form button { font-size: 1.2em; padding: 16px; }
             .social-icons-contact { font-size: 2.8em; gap: 30px; }
-            .contact-details { font-size: 1.05em; gap: 15px; }
+            .contact-details span { flex-direction: column; gap: 8px; text-align: center; }
             .footer-quote { font-size: 1.3em; }
         }
 
@@ -920,8 +922,7 @@
             .social-icons-contact { font-size: 2.5em; gap: 25px; }
             .contact-details span { flex-direction: column; gap: 8px; text-align: center; }
             .footer-quote { font-size: 1.1em; }
-        }
-    </style>
+        </style>
 </head>
 <body>
     <div id="splash-screen">
@@ -951,7 +952,7 @@
                     <button class="btn-primary" data-link="#projects">
                         <i class="fas fa-th-large"></i> View Projects
                     </button>
-                    <button class="btn-secondary" data-link="assets/Smit_Sapariya_Resume.pdf" data-download="true">
+                    <button class="btn-secondary" data-link="Resume.pdf" data-download="true">
                         <i class="fas fa-download"></i> Download Resume
                     </button>
                     <button class="btn-primary" data-link="#contact">
@@ -1057,7 +1058,7 @@
                     <div class="resume-card-box glass-layer">
                         <p>Access my comprehensive resume to dive deeper into my skills, projects, and professional journey.</p>
                         <div class="resume-buttons">
-                            <button class="btn-primary" data-link="assets/Smit_Sapariya_Resume.pdf" data-download="true">
+                            <button class="btn-primary" data-link="Resume.pdf" data-download="true">
                                 <i class="fas fa-download"></i> Download PDF
                             </button>
                             </div>
@@ -1113,11 +1114,11 @@
         // --- Data for the portfolio ---
         const portfolioData = {
             heroTagline: "Designing smooth interfaces. Building smart apps. Creating with code.",
-            resumeFilePath: "assets/Smit_Sapariya_Resume.pdf" // Ensure this path is correct
+            resumeFilePath: "Resume.pdf" // Correct path for your setup
         };
 
         // --- GSAP Registrations ---
-        gsap.registerPlugin(ScrollTrigger, TextPlugin, ScrollToPlugin); // Registered ScrollToPlugin
+        gsap.registerPlugin(ScrollTrigger, TextPlugin, ScrollToPlugin);
 
         // --- Splash Screen & Initial Animations ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -1145,17 +1146,17 @@
                         gsap.to(mainContent, { autoAlpha: 1, duration: 0.8, ease: "power3.out", delay: 0.2 });
 
                         // Hero section animations
-                        gsap.fromTo(heroHeadline, { y: 50, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, ease: "power3.out", delay: 0.3 }); // Reduced delay
+                        gsap.fromTo(heroHeadline, { y: 50, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, ease: "power3.out", delay: 0.3 });
                         gsap.to(heroTagline, {
-                            duration: 2, // Faster typing
-                            delay: 0.8, // Reduced delay after headline
+                            duration: 2,
+                            delay: 0.8,
                             text: portfolioData.heroTagline,
                             ease: "none",
                             onComplete: () => {
-                                heroTagline.style.borderRight = 'none'; // Remove blinking cursor after typing
+                                heroTagline.style.borderRight = 'none';
                             }
                         });
-                        gsap.fromTo(heroButtons, { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out", delay: 2.8 }); // Adjusted delay
+                        gsap.fromTo(heroButtons, { y: 30, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out", delay: 2.8 });
                     }, 500); // Small pause after splash fades out
                 }
             });
@@ -1169,13 +1170,13 @@
                 gsap.to(customCursor, {
                     x: e.clientX,
                     y: e.clientY,
-                    duration: 0.1, // Slightly faster
+                    duration: 0.1,
                     ease: "power2.out"
                 });
             }
         });
 
-        // Magnetic Button Effect
+        // Magnetic Button Effect and Ripple Effect & Navigation/Download
         document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
             button.addEventListener('mousemove', (e) => {
                 const rect = button.getBoundingClientRect();
@@ -1185,18 +1186,18 @@
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
 
-                const deltaX = (x - centerX) * 0.2; // Adjusted magnetism strength
-                const deltaY = (y - centerY) * 0.2; // Adjusted magnetism strength
+                const deltaX = (x - centerX) * 0.2;
+                const deltaY = (y - centerY) * 0.2;
 
                 gsap.to(button, {
                     x: deltaX,
                     y: deltaY,
-                    duration: 0.2, // Faster magnetism
+                    duration: 0.2,
                     ease: "power1.out"
                 });
 
                 if (customCursor) {
-                    customCursor.classList.add('active'); // Enlarge cursor
+                    customCursor.classList.add('active');
                 }
             });
 
@@ -1204,15 +1205,15 @@
                 gsap.to(button, {
                     x: 0,
                     y: 0,
-                    duration: 0.3, // Faster snap back
-                    ease: "elastic.out(1, 0.5)" // Elastic snap back
+                    duration: 0.3,
+                    ease: "elastic.out(1, 0.5)"
                 });
                 if (customCursor) {
-                    customCursor.classList.remove('active'); // Shrink cursor
+                    customCursor.classList.remove('active');
                 }
             });
 
-            // Ripple Effect & Navigation/Download
+            // THIS IS THE CLICK HANDLER FOR ALL BUTTONS, INCLUDING DOWNLOAD
             button.addEventListener('click', function(e) {
                 const circle = document.createElement('span');
                 const diameter = Math.max(this.clientWidth, this.clientHeight);
@@ -1232,16 +1233,16 @@
                 // Handle navigation/download for buttons
                 const link = this.dataset.link;
                 if (link) {
-                    if (this.dataset.download) {
-                        window.open(link, '_blank');
-                    } else if (link.startsWith('#')) {
+                    if (this.dataset.download) { // <--- Checks if data-download="true"
+                        window.open(link, '_blank'); // <--- Opens the PDF (or other file) in a new tab
+                    } else if (link.startsWith('#')) { // <--- Handles scrolling to sections
                         const targetElement = document.querySelector(link);
                         if (targetElement) {
                             const navbarHeight = document.querySelector('.navbar').offsetHeight;
                             const offsetTop = targetElement.offsetTop - navbarHeight;
-                            gsap.to(window, { scrollTo: { y: offsetTop, autoKill: false }, duration: 1, ease: "power3.inOut" }); // Faster scroll
+                            gsap.to(window, { scrollTo: { y: offsetTop, autoKill: false }, duration: 1, ease: "power3.inOut" });
                         }
-                    } else {
+                    } else { // <--- Fallback for other external links (not # or data-download)
                         window.open(link, '_blank');
                     }
                 }
@@ -1253,16 +1254,16 @@
         const canvas = document.getElementById('background-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        const numParticles = 80; // Reduced particle count for performance
+        const numParticles = 80;
         const particleSize = 1.5;
-        const particleSpeed = 0.3; // Slower, more subtle movement
-        const lineColor = 'rgba(14, 246, 204, 0.08)'; // More transparent lines
-        const connectDistance = 120; // Shorter connection distance
+        const particleSpeed = 0.3;
+        const lineColor = 'rgba(14, 246, 204, 0.08)';
+        const connectDistance = 120;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            initParticles(); // Re-initialize particles on resize
+            initParticles();
         }
 
         function initParticles() {
@@ -1273,35 +1274,25 @@
                     y: Math.random() * canvas.height,
                     vx: (Math.random() - 0.5) * particleSpeed,
                     vy: (Math.random() - 0.5) * particleSpeed,
-                    color: `rgba(${Math.random() * 50 + 10}, ${Math.random() * 200 + 50}, ${Math.random() * 200 + 50}, 0.8)` // Varying cyan/magenta/lime tones
+                    color: `rgba(${Math.random() * 50 + 10}, ${Math.random() * 200 + 50}, ${Math.random() * 200 + 50}, 0.8)`
                 });
             }
         }
 
         function drawParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            // No need to fill with black, canvas clears automatically, unless specifically desired for blending.
-            // ctx.fillStyle = 'black';
-            // ctx.fillRect(0, 0, canvas.width, canvas.height); 
-
             for (let i = 0; i < particles.length; i++) {
                 const p1 = particles[i];
-
-                // Update position
                 p1.x += p1.vx;
                 p1.y += p1.vy;
-
-                // Bounce off walls
                 if (p1.x < 0 || p1.x > canvas.width) p1.vx *= -1;
                 if (p1.y < 0 || p1.y > canvas.height) p1.vy *= -1;
 
-                // Draw particle
                 ctx.beginPath();
                 ctx.arc(p1.x, p1.y, particleSize, 0, Math.PI * 2);
                 ctx.fillStyle = p1.color;
                 ctx.fill();
 
-                // Draw lines to nearby particles
                 for (let j = i + 1; j < particles.length; j++) {
                     const p2 = particles[j];
                     const distance = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
@@ -1320,19 +1311,19 @@
         }
 
         window.addEventListener('resize', resizeCanvas);
-        resizeCanvas(); // Initial call
-        drawParticles(); // Start animation
+        resizeCanvas();
+        drawParticles();
 
 
         // --- GSAP Scroll-Triggered Section Reveals ---
         gsap.utils.toArray(".section-container:not(#hero)").forEach(section => {
             gsap.fromTo(section, 
-                { y: 70, autoAlpha: 0, scale: 0.98 }, // Slightly less aggressive transform
+                { y: 70, autoAlpha: 0, scale: 0.98 },
                 {
                     y: 0, 
                     autoAlpha: 1, 
                     scale: 1,
-                    duration: 1.2, // Faster duration
+                    duration: 1.2,
                     ease: "power3.out",
                     scrollTrigger: {
                         trigger: section,
@@ -1342,18 +1333,17 @@
                 }
             );
 
-            // Animate inner content of sections slightly later
             gsap.fromTo(section.querySelectorAll('h2, p, .glass-layer, .skills-graph, .projects-grid, .contact-content'),
-                { y: 30, autoAlpha: 0 }, // Smaller initial y offset
+                { y: 30, autoAlpha: 0 },
                 {
                     y: 0,
                     autoAlpha: 1,
-                    duration: 1, // Faster duration
+                    duration: 1,
                     ease: "power2.out",
-                    stagger: 0.1, // Slightly faster stagger
+                    stagger: 0.1,
                     scrollTrigger: {
                         trigger: section,
-                        start: "top 65%", // Trigger slightly after section container
+                        start: "top 65%",
                         toggleActions: "play none none reverse",
                     }
                 }
@@ -1364,32 +1354,32 @@
         gsap.utils.toArray(".skill-bar-container").forEach(container => {
             const fill = container.querySelector('.skill-bar-fill');
             const percentageSpan = container.querySelector('.skill-bar-percentage');
-            const level = container.dataset.level; // Get level from data attribute
+            const level = container.dataset.level;
 
             gsap.to(fill, {
                 scrollTrigger: {
                     trigger: container,
                     start: "top 80%",
-                    end: "bottom 20%", // Keep animation active longer
-                    toggleActions: "play reverse play reverse", // Play on enter, reverse on leaveBack, play on re-enter, reverse on re-leave
+                    end: "bottom 20%",
+                    toggleActions: "play reverse play reverse",
                     onEnter: () => {
                         gsap.to(fill, {
                             width: `${level}%`,
-                            duration: 1.5, // Controlled duration for clarity
+                            duration: 1.5,
                             ease: "power3.out",
                             onUpdate: () => {
                                 const currentWidth = parseFloat(gsap.getProperty(fill, "width")) / container.offsetWidth * 100;
                                 percentageSpan.textContent = `${Math.round(currentWidth)}%`;
                             },
                             onComplete: () => {
-                                percentageSpan.textContent = `${level}%`; // Ensure final value is exact
+                                percentageSpan.textContent = `${level}%`;
                             }
                         });
                     },
                     onLeaveBack: () => {
                         gsap.to(fill, {
                             width: '0%',
-                            duration: 0.6, // Faster reset
+                            duration: 0.6,
                             ease: "power2.out",
                             onUpdate: () => {
                                 percentageSpan.textContent = "0%";
@@ -1424,13 +1414,12 @@
                     const navbarHeight = document.querySelector('.navbar').offsetHeight;
                     let offset = targetElement.offsetTop - navbarHeight;
 
-                    // Adjust for the hero section to start at the very top
                     if (targetId === '#hero') {
                         offset = 0; 
                     }
 
                     gsap.to(window, {
-                        duration: 1, // Faster smooth scroll
+                        duration: 1,
                         scrollTo: {
                             y: offset,
                             autoKill: false 
